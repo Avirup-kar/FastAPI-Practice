@@ -15,3 +15,7 @@ def get_users(name: str = None):
 @app.get("/products")
 def get_users(item: int = 10):
     return {"Item": item}
+
+@app.get("/items")
+def get_users(name: str = None, price: int = 0):
+    return {"Name": name, "Price": price}
