@@ -8,5 +8,10 @@ def get_user(user_id: int):
 
 
 @app.get("/users")
-def get_users(name):
+def get_users(name: str = None):
     return {"Name":name}
+
+
+@app.get("/products")
+def get_users(item: int = 10):
+    return {"Item": item}
