@@ -23,3 +23,4 @@ def update_user(user_id: int, user: User, notify: bool = False):
                "Notify": notify,
                "Data": user
           }
+     return {"err": "User not found"} 
