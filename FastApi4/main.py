@@ -9,4 +9,13 @@ class User(BaseModel):
     email: str
 
 
-@app.post("")    
+@app.post("/create_user")
+def create_user(user: User):
+    return {
+        "Message": "User created",
+        "data": user
+    }
+
+
+class address(BaseModel):
+    
