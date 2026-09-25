@@ -10,8 +10,8 @@ def create_user():
     }
     
     
-@app.get("/get_user")
-def get_user():
+@app.get("/get_users")
+def get_users():
     return {
         "status": "Success",
         "message": "User created",
@@ -20,3 +20,12 @@ def get_user():
             "age": 19
         }
     }
+    
+@app.get("/users/{user_id}")
+def get_user(user_id:int):
+    if user_id != 1:
+        raise HTTPException(
+            status_code=404,
+            detail="User Not Found"
+        )
+    return    
