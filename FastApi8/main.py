@@ -1,4 +1,4 @@
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, HTTPException
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -7,4 +7,16 @@ app = FastAPI()
 def create_user():
     return {
         "Message": "User created"
+    }
+    
+    
+@app.get("/get_user")
+def get_user():
+    return {
+        "status": "Success",
+        "message": "User created",
+        "data": {
+            "name": "Avirup kar",
+            "age": 19
+        }
     }
