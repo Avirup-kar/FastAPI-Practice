@@ -18,3 +18,8 @@ def create_user(user: User):
 def update_user(user_id: int, user: User, notify: bool = False):
      if user_id > len(users):
           users[user_id] = user       
+          return {
+               "Message": "User updated",
+               "Notify": notify,
+               "Data": user
+          }
