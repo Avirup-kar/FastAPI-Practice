@@ -18,8 +18,15 @@ def create_todo(todo: Todo):
         "Data": todos
     }
 
-@app.get("/todo")
-def get_todo():
+@app.get("/todos")
+def get_todos():
     return {
         "Data": todos
     }    
+
+@app.get("/todo/{todo_id}")
+def get_todo(todo_id: int):
+    for todo in todos:
+        if todo.id == todo_id:
+            return todo
+    return {"err": "todo not found"}        
