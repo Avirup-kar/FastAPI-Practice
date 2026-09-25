@@ -28,4 +28,7 @@ def get_user(user_id:int):
             status_code=404,
             detail="User Not Found"
         )
-    return    
+    return {
+        "id": 1,
+        "name": "Mohit"
+    }
