@@ -42,6 +42,7 @@ def update_todo(todo_id: int, updated_todo: Todo):
 @app.delete("/todo/delet/{todo_id}")
 def delet_todo(todo_id: int):
      for index,todo in enumerate(todos):
-            if todo.id == todo_id:
-                todos.pop(index)
-                return todos
+         if todo.id == todo_id:
+            todos.pop(index)
+            return todos
+     return {"err": "todo not found"}          
