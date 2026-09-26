@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Header
+from fastapi import FastAPI, Depends, Header, HTTPException
 
 app = FastAPI()
 
@@ -16,3 +16,9 @@ app = FastAPI()
 # def dashboard(user = Depends(get_current_user)):
 #     return user    
 
+def verify_token(token: str = Header(None)):
+    if token != "mysecrettoken":
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized"
+        )
