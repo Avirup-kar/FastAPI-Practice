@@ -6,7 +6,7 @@ app = FastAPI()
 async def my_middleware(request: requests, call_next):
     print("Request Received")
     
-    responce = call_next(request)
+    responce = await call_next(request)
     
     print("Responce send")
     
