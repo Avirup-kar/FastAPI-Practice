@@ -16,7 +16,7 @@ def user_not_found_handler(reqquest: requests, exe: UserNotFoundException):
             "status":"error",
             "message": f"User {exe.name} not found"
         }
-    )    
+    )
     
 @app.get("/users/{name}")
 def get_user(name:str):
