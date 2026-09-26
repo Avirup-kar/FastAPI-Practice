@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 
-app = FastAPI
+app = FastAPI()
 DATABASE_URL = "sqlite:///./test.db"
 
 engine = create_engine(
@@ -25,3 +25,16 @@ class Todod(Base):
 Base.metadata.create_all(bind=engine)    
 
 
+def get_db():
+    db = sessionLocal()
+    try:
+      yield db
+    finally:
+      db.close()
+      
+
+@app.get("/")
+def home(db: Session = Depends(get_db)):
+    return{
+      "message": "DB connected fine"
+    }      
