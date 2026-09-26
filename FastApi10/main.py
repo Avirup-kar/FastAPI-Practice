@@ -26,5 +26,10 @@ def verify_token(token: str = Header(None)):
        "user":"Authorized User"
     }    
         
-        
+@app.get("/secure_data")
+def secure_data(user = Depends(verify_token)):
+    return {
+        "message": "Secure data accessed",
+        "user": user
+    }        
         
