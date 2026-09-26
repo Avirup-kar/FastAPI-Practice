@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Requests
+from fastapi import FastAPI, HTTPException, requests
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
@@ -9,7 +9,7 @@ class UserNotFoundException(Exception):
           self.name = name
           
 @app.exception_handler(UserNotFoundException)      
-def user_not_found_handler(reqquest: Requests, exe: UserNotFoundException):
+def user_not_found_handler(reqquest: requests, exe: UserNotFoundException):
     return JSONResponse(
         status_code=404,
         content={
