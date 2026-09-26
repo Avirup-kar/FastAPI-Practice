@@ -22,14 +22,12 @@ def verify_token(token: str = Header(None)):
             status_code=401,
             detail="Unauthorized"
         )
-    return {
-       "user":"Authorized User"
-    }    
+    return { "Authorized User" }    
         
 @app.get("/secure_data")
 def secure_data(user = Depends(verify_token)):
     return {
-        "message": "Secure data accessed",
-        "user": user
+       "message": "Secure data accessed",
+       "user": user
     }        
         
