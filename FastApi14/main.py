@@ -1,11 +1,19 @@
 from fastapi import FastAPI
 import time
+import asyncio
 
+app = FastAPI()
 
-def task():
-    time.sleep()
-    print("Print the data")
-    return
+@app.get("/")
+async def home():
+    await asyncio.sleep(3)
+    return{
+       "message": "Async API"
+    }
 
-task()
+# async def task():
+#     await time.sleep(3)
+#     print("Print the data")
+#     return
 
+# task()
