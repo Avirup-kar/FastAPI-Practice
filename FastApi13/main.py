@@ -49,4 +49,9 @@ def create_todo(title: str, db: Session = Depends(get_db)):
 #Read all data
 @app.get("/todos")
 def get_todos(db: Session = Depends(get_db)):
-  todos = db.query(todos)  
+  todos = db.query(todos).all()
+  
+  return{
+    "Total": len(todos),
+    "Data": todos
+  }
