@@ -37,3 +37,5 @@ def get_db():
 @app.post("/todos")
 def create_todo(title: str, db: Session = Depends(get_db)):
   todo = Todo(title=title, complted="False")
+  db.add(todo)
+  db.commit()
