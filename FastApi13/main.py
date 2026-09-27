@@ -44,3 +44,9 @@ def create_todo(title: str, db: Session = Depends(get_db)):
     "message": "Todo Creaded",
     "data": todo
   }
+  
+
+#Read all data
+@app.get("/todos")
+def get_todos(db: Session = Depends(get_db)):
+  todos = db.query(todos)  
