@@ -6,3 +6,6 @@ def task():
     time.sleep()
     print("Print the data")
     return
+
+task()
+
