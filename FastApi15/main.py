@@ -17,4 +17,14 @@ def create_token(data: dict):
     
     token = jwt.encode(to_encode, SECRECT_KEY, algorithm=ALGORITHM)
     
-    
+    return token
+
+
+#Login API (Token Genrate)
+@app.post("/login")
+def login(username:str,password:str):
+    if username != "admin" or password != "1234":
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid Username and password"
+        )
