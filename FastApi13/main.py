@@ -14,7 +14,7 @@ sessionLocal = sessionmaker(bind=engine)
 
 Base = declarative_base()
 
-class Todod(Base):
+class Todo(Base):
     __tablename__ = "todos"
     
     id = Column(Integer, primary_key=True, index=True)
@@ -33,8 +33,7 @@ def get_db():
       db.close()
       
 
-@app.get("/")
-def home(db: Session = Depends(get_db)):
-    return{
-      "message": "DB connected fine"
-    }      
+#Create Api     
+@app.post("/todos")
+def create_todo(title: str, db: Session = Depends(get_db)):
+  todo = Todo(title=title, complted="False")
