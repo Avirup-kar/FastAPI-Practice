@@ -65,3 +65,20 @@ def get_todo_by_id(todo_id: int, db: Session = Depends(get_db)):
        raise HTTPException(status_code=404, detail="Todo not found")
     
     return todo
+  
+
+#Update  
+@app.put("/todos/{todo_id}")
+def update_todo(todo_id:int, title:str, db: Session = Depends (get_db)):
+     todo = db.query(Todo).filter(Todo.id == todo_id).first()
+        
+     if not todo:
+        raise HTTPException(status_code=404, detail="Todo not found")
+      
+     todo.title = title
+     db.commit()
+     return {
+        "message": "Todo updated",
+        "data": todo
+     }
+      
