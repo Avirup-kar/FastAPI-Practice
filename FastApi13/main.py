@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 
 app = FastAPI()
 DATABASE_URL = "sqlite:///./test.db"
@@ -61,6 +61,7 @@ def get_todos(db: Session = Depends(get_db)):
 def get_todo_by_id(todo_id: int, db: Session = Depends(get_db)):
     todo = db.query(Todo).filter(Todo.id == todo_id).first()
     
-    return{
-        "Data": todo
-      }
+    if not todo:
+       raise HTTPException(status_code=404, detail="Todo not found")
+    
+    return todo
