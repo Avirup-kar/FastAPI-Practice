@@ -58,5 +58,5 @@ def get_todos(db: Session = Depends(get_db)):
   
   
 @app.get("/todos/{todo_id}")
-def get_todo_by_id(todo_id: int):
-    
+def get_todo_by_id(todo_id: int, db: Session = Depends(get_db)):
+    todo = db.query(Todo).filter(Todo.id == todo_id)
