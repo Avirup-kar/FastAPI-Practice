@@ -17,6 +17,22 @@ pwd_context = CryptContext(schemes=["bycrypt"])
 #OAuth Setup
 OAuth2_schema = OAuth2PasswordBearer(tokenUrl="login")
 
+#Dummy_user_data
+fake_user_db = {
+    "admin": {
+        "username": "admin",
+        "hashed_password": pwd_context.hash("12345")
+    }
+}
+
+#Hash Password
+def hash_password (password:str):
+    return pwd_context.hash(password)
+
+#varify Password
+def varify_password(plain_password, hased_password):
+    return pwd_context.verify(plain_password, hased_password)
+
 def create_token(data: dict):
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(minutes=30)
@@ -31,20 +47,7 @@ def create_token(data: dict):
 
 #Login API (Token Genrate)
 @app.post("/login")
-def login(username:str,password:str):
-    if username != "admin" or password != "1234":
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid Username and password"
-        )
-        
-    token = create_token({
-        "sub": username
-    })  
-    
-    return{
-     "access_token": token
-    }
+def login()
     
     
 #Token verify
