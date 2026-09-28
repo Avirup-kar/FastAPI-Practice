@@ -38,4 +38,7 @@ def login(username:str,password:str):
     }
     
     
-    
+#Token verify
+def verify_token(token: str = Header(None)):
+    try:
+        payload = jwt.decode()
