@@ -12,7 +12,7 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 #Password hashing setup
-pwd_context = CryptContext(schemes=["bycrypt"])
+pwd_context = CryptContext(schemes=["bcrypt"])
 
 #OAuth Setup
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="login")
