@@ -47,7 +47,8 @@ def create_token(data: dict):
 
 #Login API (Token Genrate)
 @app.post("/login")
-def login()
+def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    user = fake_user_db(form_data:username)
     
     
 #Token verify
