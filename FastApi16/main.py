@@ -81,6 +81,7 @@ def verify_token(token: str = Depends(oauth2_schema)):
             detail="Invalid or expired Token"
         )
         
+        
 @app.get("/protected")
 def protected_route(username: str = Depends(verify_token)):
     return {
