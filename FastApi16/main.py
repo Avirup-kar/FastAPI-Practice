@@ -19,9 +19,9 @@ OAuth2_schema = OAuth2PasswordBearer(tokenUrl="login")
 
 #Dummy_user_data
 fake_user_db = {
-    "admin": {
-        "username": "admin",
-        "hashed_password": pwd_context.hash("12345")
+    "admin":{
+        "username":"admin",
+        "hashed_password":pwd_context.hash("1234")
     }
 }
 
@@ -48,7 +48,13 @@ def create_token(data: dict):
 #Login API (Token Genrate)
 @app.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = fake_user_db(form_data:username)
+    user = fake_user_db.get(form_data.username)
+    if not user or not varify_password(form_data.password, user["hashed_password"]):
+         raise HTTPException(
+            status_code=400,
+            detail="Invalid username or password"
+        )
+    access_token = 
     
     
 #Token verify
