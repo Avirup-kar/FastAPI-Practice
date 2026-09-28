@@ -54,7 +54,8 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
             status_code=400,
             detail="Invalid username or password"
         )
-    access_token = 
+    access_token = create_token({"sub": form_data.username})
+    
     
     
 #Token verify
