@@ -39,7 +39,6 @@ def upload_file(file: UploadFile = File(...)):
 @app.get("/files/{filename}")
 def get_file(filename: str):
     file_path = os.path.join(UPLOAD_DIR, filename)
-    print("Hi", file_path)
     
     if not os.path.exists(file_path):
             raise HTTPException (status_code=404, detail="File not found")
