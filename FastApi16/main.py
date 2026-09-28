@@ -5,9 +5,10 @@ from datetime import datetime, timedelta, timezone
 
 app = FastAPI()
 
+#JWT Config
 SECRECT_KEY = "my^%385683^3name5u47465#@&is758$fastapi"
-
 ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 def create_token(data: dict):
     to_encode = data.copy()
