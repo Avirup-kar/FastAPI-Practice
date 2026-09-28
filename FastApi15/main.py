@@ -48,3 +48,10 @@ def verify_token(token: str = Header(None)):
             status_code=401,
             detail="Invalid or expired Token"
         )
+        
+@app.get("/secure")
+def secure_data(user = Depends(verify_token)):
+    return{
+        "message": "Secure Data Accessed",
+        "user": user
+    }
