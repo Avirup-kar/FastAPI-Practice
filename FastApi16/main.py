@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from jose import jwt
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import datetime, timedelta, timezone
+from passlib.context import CryptContext
 
 app = FastAPI()
 
@@ -9,6 +10,12 @@ app = FastAPI()
 SECRECT_KEY = "my^%385683^3name5u47465#@&is758$fastapi"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+#Password hashing setup
+pwd_context = CryptContext(schemes=["bycrypt"])
+
+#OAuth Setup
+OAuth2_schema = OAuth2PasswordBearer(tokenUrl="login")
 
 def create_token(data: dict):
     to_encode = data.copy()
