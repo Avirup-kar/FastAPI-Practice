@@ -15,7 +15,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 pwd_context = CryptContext(schemes=["bycrypt"])
 
 #OAuth Setup
-OAuth2_schema = OAuth2PasswordBearer(tokenUrl="login")
+oauth2_schema = OAuth2PasswordBearer(tokenUrl="login")
 
 #Dummy_user_data
 fake_user_db = {
@@ -56,22 +56,34 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
         )
     access_token = create_token({"sub": form_data.username})
     
+    return {
+        "access_token":access_token,
+        "token_type":"bearer"
+    }
     
     
 #Token verify
-def verify_token(token: str = Header(None)):
+def verify_token(token: str = Depends(oauth2_schema)):
     try:
         payload = jwt.decode(token, SECRECT_KEY, algorithms=ALGORITHM)
-        return payload
-    except:
+        username: str = payload.get("sub")
+        
+        if username is None:
+            raise HTTPException(
+                status_code=401,
+                detail="Invalid token"
+            )
+
+        return username
+    except jwt.JWTError:
         raise HTTPException(
             status_code=401,
             detail="Invalid or expired Token"
         )
         
-@app.get("/secure")
-def secure_data(user = Depends(verify_token)):
-    return{
-        "message": "Secure Data Accessed",
-        "user": user
+@app.get("/protected")
+def protected_route(username: str = Depends(verify_token)):
+    return {
+        "message":"Hello you have access to this protected route!",
+        "user":username
     }
