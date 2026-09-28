@@ -41,4 +41,10 @@ def login(username:str,password:str):
 #Token verify
 def verify_token(token: str = Header(None)):
     try:
-        payload = jwt.decode()
+        payload = jwt.decode(token, SECRECT_KEY, algorithms=ALGORITHM)
+        return payload
+    except:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired Token"
+        )
