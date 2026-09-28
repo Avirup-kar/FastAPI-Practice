@@ -28,3 +28,14 @@ def login(username:str,password:str):
             status_code=401,
             detail="Invalid Username and password"
         )
+        
+    token = create_token({
+        "sub": username
+    })  
+    
+    return{
+     "access_token": token
+    }
+    
+    
+    
