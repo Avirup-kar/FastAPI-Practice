@@ -18,5 +18,5 @@ def test_add():
     #Status code check
     assert response.status_code == 200
     #Response data check
-    assert response.json() == {"result": "8"}
+    assert response.json() == {"result": 8}
     
