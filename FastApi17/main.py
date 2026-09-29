@@ -20,10 +20,12 @@ app.mount("/files", StaticFiles(directory=UPLOAD_DIR), name="files")
 @app.post("/upload")
 def upload_file(file: UploadFile = File(...)):
     filename = file.filename
-    file_path = os.path.join(UPLOAD_DIR, filename)
     
     if not filename:
         raise HTTPException (status_code=400, detail="File not selected")
+    
+    file_path = os.path.join(UPLOAD_DIR, filename)
+    
     
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
