@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import os 
-from dotenv import load_dotenv
+
+# import os 
+# from dotenv import load_dotenv
 
 app = FastAPI()
-load_dotenv()
+# load_dotenv()
 
 #Allowed Origins (Front-end URL)
 
