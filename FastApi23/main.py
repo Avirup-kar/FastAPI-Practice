@@ -18,3 +18,9 @@ def rate_limit_handler(request: requests, exc: RateLimitExceeded):
         )
     
 
+#Rate Limiter API
+@app.get("/data")
+def get_data(request: requests):
+    return{
+     "message": "Success"
+    }
