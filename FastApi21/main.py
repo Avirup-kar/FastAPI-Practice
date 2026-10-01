@@ -30,7 +30,8 @@ def get_news(page: int = 1, limit:int = 5):
         
     #Pagination Logic
     start = (page - 1 ) * limit
+    end = start + limit
     
     return{
-        "news": title
+        "page": page
     }  
