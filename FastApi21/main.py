@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 app = FastAPI()
 
 @app.get("/news")
-def get_news():
+def get_news(page: int = 1, limit:int = 5):
     url = "https://news.ycombinator.com/"
     
     response = requests.get(url)
