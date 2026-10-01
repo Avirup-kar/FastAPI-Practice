@@ -37,7 +37,10 @@ def get_news(page: int = 1, limit:int = 5):
         title = []
             
         cache_data = [    
-        item.text for item in soup.find_all("span", class_="titleline"):
-            title.append(item.text)
+            item.text for item in soup.find_all("span", class_="titleline"):
+                title.append(item.text)
         ]
+        
+        last_fetch = time.time()
     
+        
