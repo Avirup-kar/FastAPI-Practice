@@ -5,4 +5,6 @@ url = "http://example.com"
 
 response = requests.get(url)
 
-soup = BeautifulSoup (requests.text,)
+soup = BeautifulSoup (requests.text, "html.parse")
+
+print(soup.title.text)
