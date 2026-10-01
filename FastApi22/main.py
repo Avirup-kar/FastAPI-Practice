@@ -12,12 +12,19 @@
 from fastapi import FastAPI
 import requests
 from bs4 import BeautifulSoup
+import time
 
 app = FastAPI()
 
+#Cache Storage
+cache_data = []
+last_fetch = 0
 
 @app.get("/news")
 def get_news(page: int = 1, limit:int = 5):
+    global cache_data, last_fetch
+    
+    start_time = time.time()
     url = "https://news.ycombinator.com/"
     
     response = requests.get(url)
