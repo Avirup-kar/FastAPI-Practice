@@ -33,5 +33,8 @@ def get_news(page: int = 1, limit:int = 5):
     end = start + limit
     
     return{
-        "page": page
+        "page": page,
+        "limit": limit,
+        "total": len(title),
+        "data": title[start:end]
     }  
