@@ -17,15 +17,17 @@ app = FastAPI()
 
 @app.get("/news")
 def get_news():
-    url = "https://indianexpress.com/"
+    url = "https://news.ycombinator.com/"
     
-    responce = requests.get(url)
+    response = requests.get(url)
     
-    soup = BeautifulSoup(requests.text, "html.parse")
+    soup = BeautifulSoup(response.text, "html.parser")
     
     title = []
     
-    for item in soup.find_all("a", class_= "topblockNews__sidebarTitle"):
+    for item in soup.find_all("span", class_="titleline"):
         title.append(item.text)
         
-        
+    return{
+        "news": title
+    }  
