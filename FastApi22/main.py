@@ -21,7 +21,7 @@ cache_data = []
 last_fetch = 0
 
 @app.get("/news")
-def get_news(page: int = 1, limit:int = 5):
+def get_news():
     global cache_data, last_fetch
     
     start = time.time()
@@ -34,13 +34,22 @@ def get_news(page: int = 1, limit:int = 5):
         
         soup = BeautifulSoup(response.text, "html.parser")
             
-        title = []
-            
         cache_data = [    
-            item.text for item in soup.find_all("span", class_="titleline"):
-                title.append(item.text)
+            item.text for item in soup.find_all("span", class_="titleline")
         ]
         
         last_fetch = time.time()
     
+    else:
+        print("Using catche Data")
         
+    end = time.time()
+
+    time_taken = round(end - start, 4)
+
+    print("Time Taken: ", time_taken)   
+    
+    return{
+        "time_taken":time_taken,
+        "data":cache_data[:5]
+    }
