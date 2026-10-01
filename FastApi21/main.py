@@ -25,4 +25,7 @@ def get_news():
     
     title = []
     
-    for item in soup.find_all("a", class_= "")
+    for item in soup.find_all("a", class_= "topblockNews__sidebarTitle"):
+        title.append(item.text)
+        
+        
