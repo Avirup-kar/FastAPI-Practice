@@ -1,6 +1,2 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
-
-DATABASE_URL = ""
-
-engin
+from sqlalchemy import Column, Integer, String, Text
+from database import base
