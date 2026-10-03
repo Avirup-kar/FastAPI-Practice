@@ -32,9 +32,9 @@ def home():
       "message": "Blog API Started"
     }
     
-#Create Blog
+#Create Blog(Protected)
 @app.post("/blog", response_model= schemas.BlogResponse)
-def create_blog(blog: schemas.BlogCreate, db:Session = Depends(get_db)):
+def create_blog(blog: schemas.BlogCreate, db:Session = Depends(get_db), user = Depends(verify_token)):
     new_blog = models.Blog(
         title = blog.title,
         content = blog.content
@@ -62,9 +62,9 @@ def get_blog(id:int, db:Session = Depends(get_db)):
     return blog
     
     
-#Update Blog API
+#Update Blog API(Protected)
 @app.put("/blogs/{id}",response_model=schemas.BlogResponse)
-def update_blog(id:int, blog: schemas.BlogCreate, db:Session = Depends(get_db)):
+def update_blog(id:int, blog: schemas.BlogCreate, db:Session = Depends(get_db), user = Depends(verify_token)):
     existing_blog = db.query(models.Blog).filter(models.Blog.id == id).first()
     
     if not existing_blog:
