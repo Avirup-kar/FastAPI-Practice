@@ -30,8 +30,19 @@ def create_blog(blog: schemas.BlogCreate, db:Session = Depends(get_db)):
         content = blog.content
     )
     
-    db.add(create_blog)
+    db.add(new_blog)
     db.commit()
-    db.refresh()
+    db.refresh(new_blog)
     
     return new_blog
+
+
+#Read All Blog
+@app.get("/blogs", response_model=list[schemas.BlogResponse])
+def get_blogs(db:Session = Depends(get_db)):
+    return db.query(models.Blog).all()
+
+#Read ONE Blog
+@app.get("/blog/{id}", response_model= schemas.BlogResponse)
+def get_blog(id: int, db:Session = Depends(get_db)):
+    return 
