@@ -47,4 +47,22 @@ def get_blogs(db:Session = Depends(get_db)):
 def get_blog(id: int, db:Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
     
+    if not blog:
+      raise HTTPException(status_code=404, detail="Blog not found")
+    return blog
     
+    
+#Update Blog API
+@app.put("/blogs/{id}",response_model=schemas.BlogResponse)
+def update_blog(id:int, blog: schemas.BlogCreate, db:Session = Depends(get_db)):
+    existing_blog = db.query(models.Blog).filter(models.Blog.id == id).first()
+    
+    if not existing_blog:
+          raise HTTPException(status_code=404, detail="Blog not found")
+      
+    existing_blog.title = blog.title
+    existing_blog.content = blog.content   
+    
+    db.commit()
+    
+    return existing_blog
