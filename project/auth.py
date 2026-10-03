@@ -18,7 +18,7 @@ def create_token(data: dict):
 
 def verify_token(token: str = Depends(oauth2_schema)):
     try:
-        payload = jwt.decode(token, Settings.SECRET_KEY, algorithm=Settings.ALGORITH)
+        payload = jwt.decode(token, Settings.SECRET_KEY, algorithms=Settings.ALGORITH)
         return payload
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid Token")
