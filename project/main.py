@@ -78,9 +78,9 @@ def update_blog(id:int, blog: schemas.BlogCreate, db:Session = Depends(get_db), 
     return existing_blog
 
 
-#DELETE Blog Api
+#DELETE Blog Api(Protected)
 @app.delete("/blogs/{id}")
-def delete_blog(id:int, db:Session = Depends(get_db)):
+def delete_blog(id:int, db:Session = Depends(get_db), user = Depends(verify_token)):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
         
     if not blog.first():
