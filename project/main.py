@@ -24,5 +24,14 @@ def home():
     
 #Create Blog
 @app.post("/blog", response_model= schemas.BlogResponse)
-def create_blog(blog: schemas.BlogCreate):
+def create_blog(blog: schemas.BlogCreate, db:Session = Depends(get_db)):
+    new_blog = models.Blog(
+        title = blog.title,
+        content = blog.content
+    )
     
+    db.add(create_blog)
+    db.commit()
+    db.refresh()
+    
+    return new_blog
