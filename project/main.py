@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import engine, Sessionlocal
 import models, schemas
+from auth import verify_token, create_token
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -14,6 +15,16 @@ def get_db():
       yield db
     finally:
       db.close()
+      
+
+#Login API
+@app.post("/login")
+def login():
+    return{
+        "access_token": create_token({"user":"admin"}),
+        "token_type": "bearer"
+    }
+      
 
 #Home
 @app.get("/")
