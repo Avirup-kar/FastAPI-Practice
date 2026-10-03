@@ -44,7 +44,7 @@ def get_blogs(db:Session = Depends(get_db)):
 
 #Read ONE Blog
 @app.get("/blog/{id}", response_model= schemas.BlogResponse)
-def get_blog(id: int, db:Session = Depends(get_db)):
+def get_blog(id:int, db:Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
     
     if not blog:
@@ -66,3 +66,9 @@ def update_blog(id:int, blog: schemas.BlogCreate, db:Session = Depends(get_db)):
     db.commit()
     
     return existing_blog
+
+
+#DELETE Blog Api
+@app.delete("/blogs/{id}")
+def delete_blog(id:int, db:Session = Depends (get_db)):
+    
