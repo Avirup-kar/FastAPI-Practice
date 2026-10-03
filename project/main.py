@@ -45,4 +45,6 @@ def get_blogs(db:Session = Depends(get_db)):
 #Read ONE Blog
 @app.get("/blog/{id}", response_model= schemas.BlogResponse)
 def get_blog(id: int, db:Session = Depends(get_db)):
-    return 
+    blog = db.query(models.Blog).filter(models.Blog.id == id).first()
+    
+    
