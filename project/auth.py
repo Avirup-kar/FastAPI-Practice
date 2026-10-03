@@ -10,3 +10,7 @@ def create_token(data: dict):
     to_encode = data.copy()
     
     expire = datetime.now(timezone.utc) + timedelta(minutes=Settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    
+    to_encode.update({"exp": expire})
+    
+    
