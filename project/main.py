@@ -24,7 +24,6 @@ def login():
         "access_token": create_token({"user":"admin"}),
         "token_type": "bearer"
     }
-      
 
 #Home
 @app.get("/")
