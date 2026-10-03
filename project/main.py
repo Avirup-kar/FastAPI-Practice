@@ -62,7 +62,7 @@ def get_blogs(page: int =1, limit: int = 5, search:str = Query(default=""), db:S
         "page": page,
         "limit": limit,
         "total": total,
-        "data": blog
+        "data": blogs
     }   
 
 #Read ONE Blog
